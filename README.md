@@ -53,11 +53,10 @@ implementation 'com.github.fonuhuolian:XNumKeyBoardView:0.0.1'
 <attr name="kbd_dividerColor" format="color" />
 <!-- 分割线高度(默认1px) -->
 <attr name="kbd_dividerHeight" format="dimension" />
-<!-- 可输入的最大长度-->
+<!-- 可输入的最大长度(默认int的最大值)-->
 <attr name="kbd_max_length" format="integer" />
 <!-- 到达最大长度后是否清除数据(默认不清除)-->
 <attr name="kbd_input_max_clear" format="boolean" />
-
 ```
 
 `xml`
@@ -94,7 +93,7 @@ void onInput(int index, int textChanged, String beforeTextChanged, String afterT
  * @param removeText       移除的内容
  * @param beforeDeleteText 移除前的内容
  * @param afterDeleteText  移除后的内容
-*/
+ */
 void onDelete(int removeIndex, String removeText, String beforeDeleteText, String afterDeleteText);
 
 /**
@@ -110,7 +109,7 @@ void onComplete(String content);
  *
  * @param textChanged     重置后的内容
  * @param beforeResetText 重置前的内容
-*/
+ */
 void onReset(String textChanged, String beforeResetText);
 
 ```
