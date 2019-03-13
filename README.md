@@ -47,7 +47,7 @@ implementation 'com.github.fonuhuolian:XNumKeyBoardView:0.0.1'
 <attr name="kbd_btn_text_size" format="dimension" />
 <!-- btn字体的颜色(默认黑色)-->
 <attr name="kbd_btn_text_color" format="color" />
-<!--右下角btn的图片资源(R.x.xxx)-->
+<!-- 右下角btn的图片资源(R.x.xxx)-->
 <attr name="kbd_lower_bottom_btn_img" format="reference" />
 <!-- 分割线颜色 可引用资源 可#999999(默认)-->
 <attr name="kbd_dividerColor" format="color" />
