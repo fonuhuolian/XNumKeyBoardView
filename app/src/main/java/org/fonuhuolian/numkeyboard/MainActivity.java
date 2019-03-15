@@ -3,6 +3,7 @@ package org.fonuhuolian.numkeyboard;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import org.fonuhuolian.xnumkeyboard.NumKeyboardListener;
@@ -11,6 +12,7 @@ import org.fonuhuolian.xnumkeyboard.XNumKeyboardView;
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
+    XNumKeyboardView kbd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +20,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textView = (TextView) findViewById(R.id.tv);
-        XNumKeyboardView kbd = (XNumKeyboardView) findViewById(R.id.xv);
+
+        kbd = (XNumKeyboardView) findViewById(R.id.xv);
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                kbd.startOpenKbdAnim();
+            }
+        });
 
         kbd.setNumKeyboardListener(new NumKeyboardListener() {
             @Override
@@ -47,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
                 textView.setText(content);
                 Log.e("onComplete", content);
+
+                kbd.startCloseKbdAnim();
             }
 
             @Override

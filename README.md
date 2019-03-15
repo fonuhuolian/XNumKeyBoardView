@@ -119,3 +119,9 @@ void onReset(String textChanged, String beforeResetText);
 ```
 setNumKeyboardListener();
 ```
+
+`设置弹出、关闭动画`
+```
+startOpenKbdAnim();
+startCloseKbdAnim();
+```

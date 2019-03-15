@@ -1,5 +1,6 @@
 package org.fonuhuolian.xnumkeyboard;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -59,6 +60,10 @@ public class XNumKeyboardView extends GridView {
     private StringBuffer inputStr = new StringBuffer();
     // 密码的监听
     private NumKeyboardListener listener;
+
+    private ObjectAnimator openAnim;
+    private ObjectAnimator closeAnim;
+
 
     public XNumKeyboardView(Context context) {
         this(context, null);
@@ -232,5 +237,29 @@ public class XNumKeyboardView extends GridView {
      */
     public void reset() {
         inputStr.delete(0, inputStr.length());
+    }
+
+    public void startOpenKbdAnim() {
+
+        int translationY = this.getBottom() - this.getTop();
+
+        if (openAnim == null) {
+            openAnim = ObjectAnimator.ofFloat(this, "translationY", translationY, 0);
+            openAnim.setDuration(300);
+        }
+
+        openAnim.start();
+    }
+
+    public void startCloseKbdAnim() {
+
+        int translationY = this.getBottom() - this.getTop();
+
+        if (closeAnim == null) {
+            closeAnim = ObjectAnimator.ofFloat(this, "translationY", 0f, translationY);
+            closeAnim.setDuration(300);
+        }
+
+        closeAnim.start();
     }
 }
