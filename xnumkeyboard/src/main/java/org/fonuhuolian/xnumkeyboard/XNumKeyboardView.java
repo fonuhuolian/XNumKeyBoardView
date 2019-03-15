@@ -241,7 +241,10 @@ public class XNumKeyboardView extends GridView {
 
     public void startOpenKbdAnim() {
 
-        int translationY = this.getBottom() - this.getTop();
+        int translationY = this.getHeight();
+
+        if (translationY == 0 && openAnim == null)
+            return;
 
         if (openAnim == null) {
             openAnim = ObjectAnimator.ofFloat(this, "translationY", translationY, 0);
@@ -249,11 +252,15 @@ public class XNumKeyboardView extends GridView {
         }
 
         openAnim.start();
+
     }
 
     public void startCloseKbdAnim() {
 
-        int translationY = this.getBottom() - this.getTop();
+        int translationY = this.getHeight();
+
+        if (translationY == 0 && openAnim == null)
+            return;
 
         if (closeAnim == null) {
             closeAnim = ObjectAnimator.ofFloat(this, "translationY", 0f, translationY);
