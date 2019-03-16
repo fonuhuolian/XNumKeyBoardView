@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -63,7 +64,6 @@ public class XNumKeyboardView extends GridView {
 
     private ObjectAnimator openAnim;
     private ObjectAnimator closeAnim;
-
 
     public XNumKeyboardView(Context context) {
         this(context, null);
@@ -228,6 +228,14 @@ public class XNumKeyboardView extends GridView {
         return (int) (dpValue * scale + 0.5f);
     }
 
+    private int getTranslationY(View view) {
+        final DisplayMetrics dm = getResources().getDisplayMetrics();
+        this.measure(
+                View.MeasureSpec.makeMeasureSpec(dm.widthPixels, View.MeasureSpec.AT_MOST),
+                View.MeasureSpec.makeMeasureSpec(dm.heightPixels, View.MeasureSpec.AT_MOST));
+        return view.getMeasuredHeight();
+    }
+
     public void setNumKeyboardListener(NumKeyboardListener listener) {
         this.listener = listener;
     }
@@ -239,34 +247,44 @@ public class XNumKeyboardView extends GridView {
         inputStr.delete(0, inputStr.length());
     }
 
+
     public void startOpenKbdAnim() {
 
-        int translationY = this.getHeight();
 
-        if (translationY == 0 && openAnim == null)
-            return;
+        if (openAnim != null) {
+            // 开启动画
+            openAnim.start();
+        } else {
 
-        if (openAnim == null) {
+            int translationY = getTranslationY(this);
+
             openAnim = ObjectAnimator.ofFloat(this, "translationY", translationY, 0);
             openAnim.setDuration(300);
-        }
 
-        openAnim.start();
+            closeAnim = ObjectAnimator.ofFloat(this, "translationY", 0f, translationY);
+            closeAnim.setDuration(300);
+
+            openAnim.start();
+        }
 
     }
 
     public void startCloseKbdAnim() {
 
-        int translationY = this.getHeight();
+        if (closeAnim != null) {
+            // 开启动画
+            closeAnim.start();
+        } else {
 
-        if (translationY == 0 && openAnim == null)
-            return;
+            int translationY = getTranslationY(this);
 
-        if (closeAnim == null) {
             closeAnim = ObjectAnimator.ofFloat(this, "translationY", 0f, translationY);
             closeAnim.setDuration(300);
-        }
 
-        closeAnim.start();
+            openAnim = ObjectAnimator.ofFloat(this, "translationY", translationY, 0);
+            openAnim.setDuration(300);
+
+            closeAnim.start();
+        }
     }
 }
