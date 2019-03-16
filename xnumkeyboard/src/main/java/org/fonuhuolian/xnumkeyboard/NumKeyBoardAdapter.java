@@ -1,6 +1,7 @@
 package org.fonuhuolian.xnumkeyboard;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,7 +89,14 @@ public class NumKeyBoardAdapter extends BaseAdapter {
                     viewHolder2.img = convertView.findViewById(R.id.x_kbd_img);
 
                     viewHolder2.layout2.setBackgroundColor(mStyle.getRightBottomBtnColor());
-                    viewHolder2.img.setImageResource(mStyle.getRightBottomImg());
+
+                    try {
+                        viewHolder2.img.setImageResource(mStyle.getRightBottomImg());
+                    } catch (Exception e) {
+                        viewHolder2.img.setImageResource(R.drawable.x_kbd_delete);
+                        Log.e("XNumKeyboardException", "kbd_lower_bottom_btn_img 资源出错!!!");
+                        Log.e("XNumKeyboardException", Log.getStackTraceString(e));
+                    }
 
                     convertView.setTag(viewHolder2);
                     break;
@@ -114,7 +122,14 @@ public class NumKeyBoardAdapter extends BaseAdapter {
                     viewHolder2 = (ViewHolder2) convertView.getTag();
 
                     viewHolder2.layout2.setBackgroundColor(mStyle.getRightBottomBtnColor());
-                    viewHolder2.img.setImageResource(mStyle.getRightBottomImg());
+
+                    try {
+                        viewHolder2.img.setImageResource(mStyle.getRightBottomImg());
+                    } catch (Exception e) {
+                        viewHolder2.img.setImageResource(R.drawable.x_kbd_delete);
+                        Log.e("XNumKeyboardException", "kbd_lower_bottom_btn_img 资源出错!!!");
+                        Log.e("XNumKeyboardException", Log.getStackTraceString(e));
+                    }
                     break;
             }
 
