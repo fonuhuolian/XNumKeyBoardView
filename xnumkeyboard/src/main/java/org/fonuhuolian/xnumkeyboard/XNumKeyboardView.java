@@ -32,10 +32,6 @@ public class XNumKeyboardView extends GridView {
     private boolean random;
     // 是否有点击动画(默认无动画)
     private boolean isClickAnim;
-    // 分割线高度(默认1px)
-    private float dividerHeight;
-    // 分割线颜色
-    private int dividerColor;
     // 可输入最大长度(默认无限)
     private int maxLength;
     // 到达最大长度后是否删除(默认不清除)
@@ -82,11 +78,6 @@ public class XNumKeyboardView extends GridView {
         this.setAdapter(numKeyBoardAdapter);
         // 每行三个
         this.setNumColumns(3);
-        // 分割线高度
-        this.setHorizontalSpacing((int) dividerHeight);
-        this.setVerticalSpacing((int) dividerHeight);
-        // 分割线颜色
-        this.setBackgroundColor(dividerColor);
         // 点击事件
         this.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -159,8 +150,6 @@ public class XNumKeyboardView extends GridView {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.XNumKeyboardView);
         random = ta.getBoolean(R.styleable.XNumKeyboardView_kbd_random, false);
         isClickAnim = ta.getBoolean(R.styleable.XNumKeyboardView_kbd_clickAnim, false);
-        dividerHeight = ta.getDimension(R.styleable.XNumKeyboardView_kbd_dividerHeight, 1);
-        dividerColor = ta.getColor(R.styleable.XNumKeyboardView_kbd_dividerColor, Color.parseColor("#999999"));
         maxLength = ta.getInteger(R.styleable.XNumKeyboardView_kbd_max_length, Integer.MAX_VALUE);
         maxClear = ta.getBoolean(R.styleable.XNumKeyboardView_kbd_input_max_clear, false);
 

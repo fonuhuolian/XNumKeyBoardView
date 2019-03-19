@@ -17,7 +17,7 @@ allprojects {
 ```
 `module build.gradle `
 ```
-implementation 'com.github.fonuhuolian:XNumKeyBoardView:0.0.6'
+implementation 'com.github.fonuhuolian:XNumKeyBoardView:0.0.7'
 ```
 
 > 混淆
@@ -27,6 +27,19 @@ implementation 'com.github.fonuhuolian:XNumKeyBoardView:0.0.6'
 ```
 
 > 用法
+
+`系统属性`
+
+```
+
+<!-- 分割线颜色 默认灰色 -->
+android:background="@color/colorPrimary"
+<!-- 水平分割线高度 默认 0 -->
+android:horizontalSpacing="1px"
+<!-- 垂直分割线高度 默认 0 -->
+android:verticalSpacing="1px"
+
+```
 
 `支持如下自定义属性`
 
@@ -49,10 +62,6 @@ implementation 'com.github.fonuhuolian:XNumKeyBoardView:0.0.6'
 <attr name="kbd_btn_text_color" format="color" />
 <!-- 右下角btn的图片资源(R.x.xxx)-->
 <attr name="kbd_lower_bottom_btn_img" format="reference" />
-<!-- 分割线颜色 可引用资源 可#999999(默认)-->
-<attr name="kbd_dividerColor" format="color" />
-<!-- 分割线高度(默认1px) -->
-<attr name="kbd_dividerHeight" format="dimension" />
 <!-- 可输入的最大长度(默认int的最大值)-->
 <attr name="kbd_max_length" format="integer" />
 <!-- 到达最大长度后是否清除数据(默认不清除)-->
