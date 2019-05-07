@@ -121,7 +121,7 @@ public class XNumKeyboardView extends GridView {
                     if (numberVibrate) {
                         try {
                             // 开启震动
-                            mVibrator.vibrate(new long[]{0, 60}, -1);
+                            mVibrator.vibrate(new long[]{0, 72}, -1);
                         } catch (Exception e) {
                             Log.e("XNumKeyboardView", "", e);
                         }
