@@ -17,7 +17,7 @@ allprojects {
 ```
 `module build.gradle `
 ```
-implementation 'com.github.fonuhuolian:XNumKeyBoardView:0.0.7'
+implementation 'com.github.fonuhuolian:XNumKeyBoardView:1.0.2'
 ```
 
 > 混淆
@@ -66,6 +66,8 @@ android:verticalSpacing="1px"
 <attr name="kbd_max_length" format="integer" />
 <!-- 到达最大长度后是否清除数据(默认不清除)-->
 <attr name="kbd_input_max_clear" format="boolean" />
+<!-- 是否开启数字点击震动(默认震动)-->
+<attr name="kbd_input_number_vibrate" format="boolean" />
 ```
 
 `xml`
