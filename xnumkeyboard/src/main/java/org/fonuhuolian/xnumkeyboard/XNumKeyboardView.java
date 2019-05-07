@@ -1,11 +1,14 @@
 package org.fonuhuolian.xnumkeyboard;
 
 import android.animation.ObjectAnimator;
+import android.app.Service;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -27,6 +30,10 @@ public class XNumKeyboardView extends GridView {
     // 适配器
     private NumKeyBoardAdapter numKeyBoardAdapter;
 
+    //创建震动服务对象
+    private Vibrator mVibrator;
+    // 是否数字按键震动
+    private boolean numberVibrate;
 
     // 是否随机数(默认不随机)
     private boolean random;
@@ -70,6 +77,8 @@ public class XNumKeyboardView extends GridView {
 
         getAttrs(context, attrs);
 
+        mVibrator = (Vibrator) context.getSystemService(Service.VIBRATOR_SERVICE);
+
         // 初始化 密码的顺序
         initList();
         // 初始化适配器
@@ -107,6 +116,15 @@ public class XNumKeyboardView extends GridView {
                     // 不超过最大长度可执行输入保存
                     if (inputStr.length() >= maxLength) {
                         return;
+                    }
+
+                    if (numberVibrate) {
+                        try {
+                            // 开启震动
+                            mVibrator.vibrate(new long[]{0, 60}, -1);
+                        } catch (Exception e) {
+                            Log.e("XNumKeyboardView", "", e);
+                        }
                     }
 
                     // 添加到数据源
@@ -162,6 +180,8 @@ public class XNumKeyboardView extends GridView {
         btnTextColor = ta.getColor(R.styleable.XNumKeyboardView_kbd_btn_text_color, Color.parseColor("#000000"));
 
         rightBottomImg = ta.getResourceId(R.styleable.XNumKeyboardView_kbd_lower_bottom_btn_img, R.drawable.x_kbd_delete);
+
+        numberVibrate = ta.getBoolean(R.styleable.XNumKeyboardView_kbd_input_number_vibrate, true);
 
         ta.recycle();
     }

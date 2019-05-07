@@ -1,1 +1,6 @@
-<manifest package="org.fonuhuolian.xnumkeyboard" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.fonuhuolian.xnumkeyboard">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+</manifest>
