@@ -27,8 +27,6 @@ public class XNumKeyboardView extends GridView {
     private int[] nums = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
     // 数字键盘数据源
     private List<Integer> list = new ArrayList<>();
-    // 适配器
-    private NumKeyBoardAdapter numKeyBoardAdapter;
 
     //创建震动服务对象
     private Vibrator mVibrator;
@@ -82,7 +80,7 @@ public class XNumKeyboardView extends GridView {
         // 初始化 密码的顺序
         initList();
         // 初始化适配器
-        numKeyBoardAdapter = new NumKeyBoardAdapter(context, list, new XBtnStyle(isClickAnim, btnColor, leftBottomBtnColor, rightBottomBtnColor,
+        NumKeyBoardAdapter numKeyBoardAdapter = new NumKeyBoardAdapter(context, list, new XBtnStyle(isClickAnim, btnColor, leftBottomBtnColor, rightBottomBtnColor,
                 btnHeight, btnTextSize, btnTextColor, rightBottomImg));
         this.setAdapter(numKeyBoardAdapter);
         // 每行三个
@@ -92,9 +90,7 @@ public class XNumKeyboardView extends GridView {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if (i == 9) {
-                    // 左下角不做任何操作
-                } else if (i == 11) {
+                if (i == 11) {
 
                     // 右下角删除操作
                     if (inputStr.length() == 0) {
@@ -110,6 +106,11 @@ public class XNumKeyboardView extends GridView {
                         listener.onDelete(inputStr.length(), deleteContent, inputStr.toString() + deleteContent, inputStr.toString());
 
                 } else {
+
+                    if (i == 9) {
+                        // 左下角不做任何操作
+                        return;
+                    }
 
                     // 输入内容
 
@@ -159,7 +160,7 @@ public class XNumKeyboardView extends GridView {
                     reset();
                 }
 
-                return position == 11 ? true : false;
+                return position == 11;
             }
         });
     }
