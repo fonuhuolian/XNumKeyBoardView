@@ -17,7 +17,7 @@ allprojects {
 ```
 `module build.gradle `
 ```
-implementation 'com.github.fonuhuolian:XNumKeyBoardView:1.0.4'
+implementation 'com.github.fonuhuolian:XNumKeyBoardView:1.0.5'
 ```
 
 > 混淆
@@ -38,6 +38,9 @@ android:background="@color/colorPrimary"
 android:horizontalSpacing="1px"
 <!-- 垂直分割线高度 默认 0 -->
 android:verticalSpacing="1px"
+<!-- 可利于此属性实现显示最上面的分割线以及分割线的高度 默认 0 -->
+<!-- 由上面的android:background来控制分割线颜色 -->
+android:paddingTop="1px"
 
 ```
 

@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:horizontalSpacing="1px"
+        android:paddingTop="1px"
         android:verticalSpacing="1px"
         app:kbd_btn_text_size="20dp"
         app:kbd_clickAnim="true"
