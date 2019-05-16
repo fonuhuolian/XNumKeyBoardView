@@ -143,7 +143,7 @@ setNumKeyboardListener();
 ```
 // 清空记录并回调监听
 // void onReset(String textChanged, String beforeResetText);
-resetKeyBoard()
+resetKeyBoard();
 ```
 
 `设置弹出、关闭动画`
