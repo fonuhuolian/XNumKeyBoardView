@@ -141,7 +141,7 @@ setNumKeyboardListener();
 
 `重置键盘`
 ```
-// 清空记录并回调
+// 清空记录并回调监听
 // void onReset(String textChanged, String beforeResetText);
 resetKeyBoard()
 ```
