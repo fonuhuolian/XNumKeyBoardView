@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                kbd.startOpenKbdAnim();
+                kbd.openKeyboard();
             }
         });
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText(content);
                 Log.e("onComplete", content);
 
-                kbd.startCloseKbdAnim();
+                kbd.closeKeyboard();
             }
 
             @Override

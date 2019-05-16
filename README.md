@@ -17,7 +17,7 @@ allprojects {
 ```
 `module build.gradle `
 ```
-implementation 'com.github.fonuhuolian:XNumKeyBoardView:1.0.5'
+implementation 'com.github.fonuhuolian:XNumKeyBoardView:1.0.6'
 ```
 
 > 混淆

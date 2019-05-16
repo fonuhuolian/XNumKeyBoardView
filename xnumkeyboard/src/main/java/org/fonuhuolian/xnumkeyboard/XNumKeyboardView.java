@@ -1,5 +1,7 @@
 package org.fonuhuolian.xnumkeyboard;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Service;
 import android.content.Context;
@@ -56,6 +58,8 @@ public class XNumKeyboardView extends GridView {
     private int btnTextColor;
     // 删除按钮的图片
     private int rightBottomImg;
+    // 关闭键盘的方式
+    private int closeMode;
 
 
     // 输入的内容
@@ -65,6 +69,8 @@ public class XNumKeyboardView extends GridView {
 
     private ObjectAnimator openAnim;
     private ObjectAnimator closeAnim;
+
+    private long animDuration = 300;
 
     public XNumKeyboardView(Context context) {
         this(context, null);
@@ -184,6 +190,8 @@ public class XNumKeyboardView extends GridView {
 
         numberVibrate = ta.getBoolean(R.styleable.XNumKeyboardView_kbd_input_number_vibrate, true);
 
+        closeMode = ta.getInt(R.styleable.XNumKeyboardView_kbd_input_close_mode, 0) == 0 ? View.INVISIBLE : View.GONE;
+
         ta.recycle();
     }
 
@@ -258,42 +266,67 @@ public class XNumKeyboardView extends GridView {
     }
 
 
-    public void startOpenKbdAnim() {
+    public void openKeyboard() {
 
-
-        if (openAnim != null) {
-            // 开启动画
-            openAnim.start();
-        } else {
-
-            int translationY = getTranslationY(this);
-
-            openAnim = ObjectAnimator.ofFloat(this, "translationY", translationY, 0);
-            openAnim.setDuration(300);
-
-            closeAnim = ObjectAnimator.ofFloat(this, "translationY", 0f, translationY);
-            closeAnim.setDuration(300);
-
-            openAnim.start();
+        if (openAnim == null) {
+            initKbdAnim();
         }
 
+        // 开启动画
+        startOpenKbdAnim();
     }
 
-    public void startCloseKbdAnim() {
+    public void closeKeyboard() {
 
-        if (closeAnim != null) {
-            // 开启动画
-            closeAnim.start();
-        } else {
+        if (closeAnim == null) {
+            initKbdAnim();
+        }
 
-            int translationY = getTranslationY(this);
+        // 开启动画
+        startCloseKbdAnim();
+    }
 
-            closeAnim = ObjectAnimator.ofFloat(this, "translationY", 0f, translationY);
-            closeAnim.setDuration(300);
+    private void initKbdAnim() {
 
-            openAnim = ObjectAnimator.ofFloat(this, "translationY", translationY, 0);
-            openAnim.setDuration(300);
+        int translationY = getTranslationY(this);
 
+        openAnim = ObjectAnimator.ofFloat(this, "translationY", translationY, 0);
+        openAnim.setDuration(animDuration);
+        openAnim.addListener(new AnimatorListenerAdapter() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+                XNumKeyboardView.this.setVisibility(VISIBLE);
+            }
+
+        });
+
+        closeAnim = ObjectAnimator.ofFloat(this, "translationY", 0f, translationY);
+        closeAnim.setDuration(animDuration);
+        closeAnim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                // 动画结束后隐藏掉
+                XNumKeyboardView.this.setVisibility(closeMode);
+            }
+        });
+    }
+
+    private void startOpenKbdAnim() {
+
+        if (this.getVisibility() == closeMode) {
+            openAnim.start();
+        } else if (this.getVisibility() == VISIBLE && closeAnim.isRunning()) {
+            closeAnim.end();
+            openAnim.start();
+        }
+    }
+
+    private void startCloseKbdAnim() {
+
+        if (this.getVisibility() == VISIBLE) {
             closeAnim.start();
         }
     }
