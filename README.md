@@ -17,7 +17,7 @@ allprojects {
 ```
 `module build.gradle `
 ```
-implementation 'com.github.fonuhuolian:XNumKeyBoardView:1.0.6'
+implementation 'com.github.fonuhuolian:XNumKeyBoardView:1.0.7'
 ```
 
 > 混淆
@@ -137,6 +137,13 @@ void onReset(String textChanged, String beforeResetText);
 
 ```
 setNumKeyboardListener();
+```
+
+`重置键盘`
+```
+// 清空记录并回调
+// void onReset(String textChanged, String beforeResetText);
+resetKeyBoard()
 ```
 
 `设置弹出、关闭动画`

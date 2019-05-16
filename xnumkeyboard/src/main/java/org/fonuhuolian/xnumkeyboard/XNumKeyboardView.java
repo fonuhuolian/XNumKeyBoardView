@@ -261,8 +261,15 @@ public class XNumKeyboardView extends GridView {
     /**
      * 重置
      */
-    public void reset() {
+    private void reset() {
         inputStr.delete(0, inputStr.length());
+    }
+
+    public void resetKeyBoard() {
+        if (listener != null) {
+            listener.onReset("", inputStr.toString());
+        }
+        reset();
     }
 
 
