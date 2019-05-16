@@ -71,6 +71,11 @@ android:paddingTop="1px"
 <attr name="kbd_input_max_clear" format="boolean" />
 <!-- 是否开启数字点击震动(默认震动)-->
 <attr name="kbd_input_number_vibrate" format="boolean" />
+<!-- 数字键盘的关闭方式(默认INVISIBLE，但这个View仍然会占用在xml文件中所分配的布局空间)-->
+<attr name="kbd_input_close_mode" format="enum">
+    <enum name="INVISIBLE" value="0" />
+    <enum name="GONE" value="1" />
+</attr>
 ```
 
 `xml`
@@ -136,6 +141,6 @@ setNumKeyboardListener();
 
 `设置弹出、关闭动画`
 ```
-startOpenKbdAnim();
-startCloseKbdAnim();
+openKeyboard();
+closeKeyboard();
 ```
